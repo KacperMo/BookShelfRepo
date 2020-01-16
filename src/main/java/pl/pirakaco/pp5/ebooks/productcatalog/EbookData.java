@@ -1,4 +1,4 @@
-package pl.pirakaco.pp5.ebooks.crm;
+package pl.pirakaco.pp5.ebooks.productcatalog;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
