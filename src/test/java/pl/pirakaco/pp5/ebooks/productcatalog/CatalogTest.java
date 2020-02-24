@@ -51,10 +51,12 @@ public class CatalogTest {
 
     private Product thereIsAProduct() {
         return Product.builder()
-                .eBookName(PRODUCT_NAME)
-                .description("fajnty")
+                .eBookTitle(PRODUCT_NAME)
+                .eBookDescription("fajnty")
                 .price(BigDecimal.valueOf(23432))
-                .format("PDF")
+                .published(true)
+                .authorFirstName("Ktos")
+                .authorLastName("Nazwisko")
                 .build();
     }
 }

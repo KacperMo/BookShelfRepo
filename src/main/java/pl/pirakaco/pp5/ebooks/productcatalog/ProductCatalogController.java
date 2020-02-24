@@ -2,57 +2,43 @@ package pl.pirakaco.pp5.ebooks.productcatalog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.pirakaco.pp5.ebooks.productcatalog.dto.ProductData;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
 public class ProductCatalogController {
 
     @Autowired
-    ProductCatalogFacade productCatalogFacade;
+    private ProductCatalogFacade productCatalogFacade;
 
-//    @GetMapping("api/ebook/{id}")
-//    Product ebook(@PathVariable String id) {
-//        return productCatalogRepository.findById(id).orElseThrow(IllegalStateException::new);
-//    }
-//
-//    @PostMapping("api/ebooks")
-//    String create(@RequestBody Product productCatalog) {
-//        productCatalog.setId(UUID.randomUUID().toString());
-//        productCatalogRepository.save(productCatalog);
-//        return productCatalog.getId();
-//    }
-//
-//    @DeleteMapping("api/ebooks/{id}")
-//    void deleteEbook(@PathVariable String id) {
-//        productCatalogRepository.deleteById(id);
-//    }
-//
-//    @PutMapping("api/ebooks/{id}")
-//    Product updateEbook(@RequestBody Product newEbook, @PathVariable String id) {
-//        return productCatalogRepository.findById(id)
-//                .map(ebook -> {
-//                    ebook.seteBookName(newEbook.geteBookName());
-//                    ebook.setAuthorFirstName(newEbook.getAuthorFirstName());
-//                    ebook.setAuthorLastName(newEbook.getAuthorLastName());
-//                    ebook.setDescription(newEbook.getDescription());
-//                    ebook.setFileSize(newEbook.getFileSize());
-//                    ebook.setReleaseDate(newEbook.getReleaseDate());
-//                    ebook.setFormat(newEbook.getFormat());
-//                    ebook.setISBN(newEbook.getISBN());
-//                    ebook.setPrice(newEbook.getPrice());
-//                    ebook.setPublishingHouse(newEbook.getPublishingHouse());
-//                    return productCatalogRepository.save(ebook);
-//                })
-//                .orElseGet(() -> {
-//                    newEbook.setId(id);
-//                    return productCatalogRepository.save(newEbook);
-//                });
-//    }
-
-    @GetMapping("/ebooks")
+    @GetMapping("/products")
     List<Product> loadAll() {
         return productCatalogFacade.loadAll();
     }
+
+    @GetMapping("/ebook/{id}")
+    ProductData ebook(@PathVariable String id) {
+        return productCatalogFacade.load(id);
+    }
+
+    //create new ebook and return its id
+    @PostMapping("/ebooks")
+    String createNewEBook(@RequestBody Product newProduct) {
+        return productCatalogFacade.create(newProduct);
+    }
+
+    @DeleteMapping("/ebooks/{id}")
+    void deleteEbook(@PathVariable String id) {
+        productCatalogFacade.deleteById(id);
+    }
+
+    @PutMapping("ebooks/{id}")
+    ProductData updateEBook(@RequestBody Product newEBook, @PathVariable String id) {
+        productCatalogFacade.modify(id, newEBook);
+        return productCatalogFacade.load(id);
+    }
+
+
 }

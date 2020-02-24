@@ -49,7 +49,7 @@ public class CatalogHttpTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).hasSize(1);
         assertThat(Arrays.stream(response.getBody())
-        .map(Product::getEBookName))
+        .map(Product::getEBookTitle))
                 .contains(PRODUCT_NAME);
     }
 
@@ -70,9 +70,12 @@ public class CatalogHttpTest {
 
     private Product thereIsProduct() {
         return Product.builder()
-                .eBookName(PRODUCT_NAME)
-                .description("fajny ebook")
+                .eBookTitle(PRODUCT_NAME)
+                .eBookDescription("fajny ebook")
                 .price(BigDecimal.valueOf(19))
+                .authorFirstName("Ktos")
+                .authorLastName("Nazwisko")
+                .published(true)
                 .build();
     }
 }

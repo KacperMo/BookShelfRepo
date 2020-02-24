@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-import java.util.Date;
+
 
 @Entity
 @Data
@@ -19,22 +19,20 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue
-    private String id;
+    String id;
 
-    private String eBookName;
-    private String authorFirstName;
-    private String authorLastName;
-    private BigDecimal price;
-    private String format;
-    private String description;
-    private String publishingHouse;
-    private String fileSize;
-    private String ISBN;
-    private Date releaseDate;
+    String eBookTitle;
+    String eBookDescription;
+    String authorFirstName;
+    String authorLastName;
+    BigDecimal price;
+    Boolean published;
+    String cover;
+
 
 
     public ProductData toData() {
-        return new ProductData(id, eBookName, price);
+        return new ProductData(id, eBookTitle, price);
     }
 
 }

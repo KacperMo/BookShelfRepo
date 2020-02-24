@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 @Data
 public class ProductData {
     String id;
-    String eBookName;
+    String eBookTitle;
     BigDecimal price;
 
-    public ProductData(String id, String eBookName, BigDecimal price) {
+    public ProductData(String id, String eBookTitle, BigDecimal price) {
         this.id = id;
-        this.eBookName = eBookName;
+        this.eBookTitle = eBookTitle;
         this.price = price;
     }
 }

@@ -12,7 +12,7 @@ public class ProductCatalogFacade {
         this.productCatalogRepository = productCatalogRepository;
     }
     public List<Product> loadAll() {
-        return productCatalogRepository.findAll();
+        return productCatalogRepository.findAllPublished();
     }
 
     public String create(Product product) {
@@ -24,5 +24,24 @@ public class ProductCatalogFacade {
         return productCatalogRepository.findById(id)
                 .map(Product::toData)
                 .orElseThrow(NoSuchProductException::new);
+    }
+
+    public void deleteById(String id) {
+        productCatalogRepository.deleteById(id);
+    }
+
+    public Product modify(String id, Product updatedProduct) {
+        return productCatalogRepository.findById(id).map(ebook -> {
+            ebook.setEBookTitle(updatedProduct.getEBookTitle());
+            ebook.setAuthorFirstName(updatedProduct.getAuthorFirstName());
+            ebook.setAuthorLastName(updatedProduct.getAuthorLastName());
+            ebook.setEBookDescription(updatedProduct.getEBookDescription());
+            ebook.setPrice(updatedProduct.getPrice());
+            return productCatalogRepository.save(ebook);
+        })
+                .orElseGet(() -> {
+                    updatedProduct.setId(id);
+                    return productCatalogRepository.save(updatedProduct);
+                });
     }
 }

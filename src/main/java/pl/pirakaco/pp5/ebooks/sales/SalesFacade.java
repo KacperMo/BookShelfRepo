@@ -1,6 +1,10 @@
 package pl.pirakaco.pp5.ebooks.sales;
 
+import pl.pirakaco.pp5.ebooks.sales.basket.Basket;
+import pl.pirakaco.pp5.ebooks.sales.basket.BasketStorage;
 import pl.pirakaco.pp5.ebooks.sales.exceptions.ProductCantBeAddedException;
+import pl.pirakaco.pp5.ebooks.sales.products.Product;
+import pl.pirakaco.pp5.ebooks.sales.products.ProductCatalog;
 
 public class SalesFacade {
     private UserContext userContext;
@@ -13,7 +17,7 @@ public class SalesFacade {
         this.productCatalog = productCatalog;
     }
 
-    public void addToBasket(Long id) {
+    public void addToBasket(String id) {
         String clientId = userContext.getCurrentUserId();
 
         Basket basket = basketStorage.getForClient(clientId)
@@ -21,7 +25,7 @@ public class SalesFacade {
         Product product = productCatalog.load(id)
                 .orElseThrow(ProductCantBeAddedException::new);
         basket.add(product);
-        basketStorage.save(basket);
+        basketStorage.save(clientId, basket);
     }
 
     public Basket getCurrentBasket() {

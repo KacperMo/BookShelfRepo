@@ -1,4 +1,4 @@
-package pl.pirakaco.pp5.ebooks.sales;
+package pl.pirakaco.pp5.ebooks.sales.products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ public class InMemoryProductCatalog implements ProductCatalog {
     private List<Product> availableProducts = new ArrayList<>();
 
     @Override
-    public Optional<Product> load(long productId) {
+    public Optional<Product> load(String productId) {
         return availableProducts.stream()
-                .filter(p -> p.getProductId() == (productId))
+                .filter(p -> p.getProductId().equals(productId))
                 .findFirst();
     }
 
