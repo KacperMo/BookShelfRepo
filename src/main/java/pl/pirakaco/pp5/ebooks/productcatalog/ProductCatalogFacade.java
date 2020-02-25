@@ -15,32 +15,32 @@ public class ProductCatalogFacade {
         return productCatalogRepository.findAllPublished();
     }
 
-    public String create(Product product) {
+    public Long create(Product product) {
         productCatalogRepository.save(product);
         return product.id;
     }
 
-    public ProductData load(String id) {
+    public ProductData load(Long id) {
         return productCatalogRepository.findById(id)
                 .map(Product::toData)
                 .orElseThrow(NoSuchProductException::new);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         productCatalogRepository.deleteById(id);
     }
 
-    public Product modify(String id, Product updatedProduct) {
-        return productCatalogRepository.findById(id).map(ebook -> {
-            ebook.setEBookTitle(updatedProduct.getEBookTitle());
-            ebook.setAuthorFirstName(updatedProduct.getAuthorFirstName());
-            ebook.setAuthorLastName(updatedProduct.getAuthorLastName());
-            ebook.setEBookDescription(updatedProduct.getEBookDescription());
-            ebook.setPrice(updatedProduct.getPrice());
-            return productCatalogRepository.save(ebook);
+    public Product modify(Long id, Product updatedProduct) {
+        return productCatalogRepository.findById(id).map(eBook -> {
+            eBook.setEBookTitle(updatedProduct.getEBookTitle());
+            eBook.setAuthorFirstName(updatedProduct.getAuthorFirstName());
+            eBook.setAuthorLastName(updatedProduct.getAuthorLastName());
+            eBook.setEBookDescription(updatedProduct.getEBookDescription());
+            eBook.setPrice(updatedProduct.getPrice());
+            return productCatalogRepository.save(eBook);
         })
                 .orElseGet(() -> {
-                    updatedProduct.setId(id);
+                    updatedProduct.setId((id));
                     return productCatalogRepository.save(updatedProduct);
                 });
     }

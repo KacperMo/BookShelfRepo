@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductCatalogRepository extends JpaRepository<Product, String> {
+public interface ProductCatalogRepository extends JpaRepository<Product, Long> {
     @Query("Select p from Product p WHERE p.published = 1")
     List<Product> findAllPublished();
 

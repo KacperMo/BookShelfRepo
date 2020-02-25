@@ -10,7 +10,6 @@ import java.util.List;
 public class Basket {
     private final HashMap<Product, Integer> productQuantities;
     public static Basket empty() {
-
         return new Basket();
     }
 

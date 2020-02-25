@@ -18,24 +18,24 @@ public class ProductCatalogController {
         return productCatalogFacade.loadAll();
     }
 
-    @GetMapping("/ebook/{id}")
-    ProductData ebook(@PathVariable String id) {
+    @GetMapping("/products/{id}")
+    ProductData ebook(@PathVariable Long id) {
         return productCatalogFacade.load(id);
     }
 
     //create new ebook and return its id
-    @PostMapping("/ebooks")
-    String createNewEBook(@RequestBody Product newProduct) {
+    @PostMapping("/products")
+    Long createNewEBook(@RequestBody Product newProduct) {
         return productCatalogFacade.create(newProduct);
     }
 
-    @DeleteMapping("/ebooks/{id}")
-    void deleteEbook(@PathVariable String id) {
+    @DeleteMapping("/products/{id}")
+    void deleteEbook(@PathVariable Long id) {
         productCatalogFacade.deleteById(id);
     }
 
-    @PutMapping("ebooks/{id}")
-    ProductData updateEBook(@RequestBody Product newEBook, @PathVariable String id) {
+    @PutMapping("/products/{id}")
+    ProductData updateEBook(@RequestBody Product newEBook, @PathVariable Long id) {
         productCatalogFacade.modify(id, newEBook);
         return productCatalogFacade.load(id);
     }

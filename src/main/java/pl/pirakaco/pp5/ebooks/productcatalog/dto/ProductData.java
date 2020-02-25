@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 public class ProductData {
-    String id;
+    Long id;
     String eBookTitle;
     BigDecimal price;
 
-    public ProductData(String id, String eBookTitle, BigDecimal price) {
+    public ProductData(Long id, String eBookTitle, BigDecimal price) {
         this.id = id;
         this.eBookTitle = eBookTitle;
         this.price = price;

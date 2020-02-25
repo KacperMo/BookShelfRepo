@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @RunWith(SpringRunner.class)
 public class CatalogTest {
     public static final String PRODUCT_NAME = "my product";
-    public static final String ID = "123";
+    public static final Long ID = 10L;
 
     @Autowired
     ProductCatalogRepository productCatalogRepository;
@@ -35,7 +35,7 @@ public class CatalogTest {
     public void itAllowsToLoadSingleProduct() {
         Product product = thereIsAProduct();
 
-        String idProduct = productCatalogFacade.create(product);
+        Long idProduct = productCatalogFacade.create(product);
 
         ProductData loaded = productCatalogFacade.load(idProduct);
 

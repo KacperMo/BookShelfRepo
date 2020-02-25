@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue
-    String id;
+    Long id;
 
     String eBookTitle;
     String eBookDescription;
